@@ -1,0 +1,7 @@
+@use "../../styles/partials/global" as *;
+@use "../../styles/partials/colors" as *;
+
+.main {
+  height: 80vh;
+  background-color: $light-beige;
+}
