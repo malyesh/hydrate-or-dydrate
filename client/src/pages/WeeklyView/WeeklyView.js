@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import axios from 'axios';
-import rightArrow from '../../assets/arrow-right-3098.svg';
-import leftArrow from '../../assets/arrow-left-3099.svg';
-import './WeeklyView.scss';
-import LineChart from '../../components/LineChart/LineChart';
+import React, { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
+import rightArrow from "../../assets/arrow-right-3098.svg";
+import leftArrow from "../../assets/arrow-left-3099.svg";
+import "./WeeklyView.scss";
+import LineChart from "../../components/LineChart/LineChart";
 
 export default function WeeklyView() {
   const [currentWeek, setCurrentWeek] = useState(null);
@@ -32,26 +32,26 @@ export default function WeeklyView() {
     return <h2>Loading....</h2>;
   }
   return (
-    <div className='week__container'>
-      <div className='week__title'>
-        <Link to={'/week/1'}>
+    <div className="week__container">
+      <div className="week__title">
+        <Link to={"/week/1"}>
           <img
             src={leftArrow}
-            alt='left arrow'
-            className='week__title--arrow'
+            alt="left arrow"
+            className="week__title--arrow"
           />
         </Link>
         <h2>{`${currentWeek.startDate} - ${currentWeek.endDate}`}</h2>
         <Link to={`/week/2`}>
           <img
             src={rightArrow}
-            alt='right arrow'
-            className='week__title--arrow'
+            alt="right arrow"
+            className="week__title--arrow"
           />
         </Link>
       </div>
 
-      <div className='week__chart'>
+      <div className="week__chart">
         <LineChart chartData={currentWeek} weekId={weekId} />
       </div>
     </div>
