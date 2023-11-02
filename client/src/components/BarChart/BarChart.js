@@ -4,17 +4,30 @@ import { Data } from '../../utils/data';
 
 import './BarChart.scss';
 
-export default function BarChart() {
-  const chartData = {
-    labels: ['', ''],
-    datasets: [
-      {
-        data: Data.map((data) => data.value),
-        backgroundColor: ['#563635', '#80A4ED'],
-        borderWidth: 0,
-      },
-    ],
+export default function BarChart({ currentDay }) {
+  const [chartData, setChartData] = useState();
+
+  let addChartData = async () => {
+    let labelsArray = ['', ''];
+    let waterValue = currentDay.waterLevel;
+    let coffeeValue = currentDay.coffeeLevel;
+
+    let chart = {
+      labels: labelsArray,
+      datasets: [
+        { data: coffeeValue, backgroundColor: '#563635' },
+        { data: waterValue, backgroundColor: '#80a4ED' },
+      ],
+    };
+
+    setChartData(chart);
+    // console.log(chart);
   };
+
+  useEffect(() => {
+    // getCurrentDay(dayId);
+    addChartData();
+  }, [currentDay]);
 
   return (
     <section className='chart'>
