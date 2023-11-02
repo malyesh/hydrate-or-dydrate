@@ -10,13 +10,26 @@
   position: relative;
 }
 .top-banner {
-  padding: 1rem;
+  padding: 1rem 0;
+  background-color: $dark-beige;
+  border-radius: 4px;
+  width: 90%;
+  text-align: center;
 }
 
 .chart {
   padding: 2rem;
   padding-bottom: 0;
   height: auto;
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    align-self: center;
+    padding-bottom: 0.5rem;
+    border-bottom: 1.5px solid $dark-green;
+    margin-bottom: 1rem;
+  }
 }
 
 .hydration {
@@ -36,8 +49,17 @@
   }
 }
 
+.button-link {
+  text-decoration: none;
+  align-self: center;
+  display: contents;
+}
+
 .week-button {
   @include custom-button;
+  &:hover {
+    background-color: $dark-red;
+  }
 }
 
 .chart__label {

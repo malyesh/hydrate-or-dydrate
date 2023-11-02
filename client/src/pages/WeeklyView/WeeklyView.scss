@@ -1,9 +1,10 @@
-@use '../../styles/partials/global' as *;
-@use '../../styles/partials/colors' as *;
+@use "../../styles/partials/global" as *;
+@use "../../styles/partials/colors" as *;
 
 .week {
   &__container {
     background-color: $light-beige;
+    height: 85vh;
   }
   &__title {
     padding: 2rem 1rem;

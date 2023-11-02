@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Line } from 'react-chartjs-2';
-import './LineChart.scss';
+import React, { useEffect, useState } from "react";
+import { Line } from "react-chartjs-2";
+import "./LineChart.scss";
 
 export default function LineChart({ chartData }) {
   const [data, setData] = useState(null);
@@ -16,16 +16,16 @@ export default function LineChart({ chartData }) {
         labels: labelsArray,
         datasets: [
           {
-            label: 'Coffee Drinked',
+            label: "Coffee Drinked",
             data: coffeeValues,
-            borderColor: '#563635',
-            backgroundColor: '#563635',
+            borderColor: "#563635",
+            backgroundColor: "#563635",
           },
           {
-            label: 'Water Drinked',
+            label: "Water Drinked",
             data: waterValues,
-            borderColor: '#80a4ed',
-            backgroundColor: '#80a4ed',
+            borderColor: "#80a4ed",
+            backgroundColor: "#80a4ed",
           },
         ],
       };
@@ -39,11 +39,11 @@ export default function LineChart({ chartData }) {
   }
 
   return (
-    <div className='chart-container'>
+    <div className="chart-container">
       <Line
         data={data}
-        width={'80%'}
-        height={'80%'}
+        width={"80%"}
+        height={"80%"}
         options={{
           plugins: {
             title: {
