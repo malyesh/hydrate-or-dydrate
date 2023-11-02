@@ -13,7 +13,7 @@ const Hero = () => {
     datasets: [
       {
         data: Data.map((data) => data.value),
-        backgroundColor: ["#563635", "#81F0E5"],
+        backgroundColor: ["#563635", "#80A4ED"],
         // borderColor: "black",
         borderWidth: 0,
       },
@@ -45,7 +45,7 @@ const Hero = () => {
         <h3 className="hydration__title">Hydration Status</h3>
         <p>Dehydrated</p>
       </article>
-      <button className="more-button">Learn more</button>
+      <button className="week-button">See weekly progress</button>
     </div>
   );
 };

@@ -7,28 +7,34 @@
   flex-direction: column;
   align-items: center;
   padding: 1rem;
+  position: relative;
 }
 .top-banner {
   padding: 1rem;
 }
 
 .chart {
-  background-color: white;
-  border-radius: 4px;
-  padding: 1rem;
+  padding: 2rem;
   height: auto;
 }
 
 .hydration {
-  padding: 1.5rem;
-
+  padding: 1rem 0;
+  margin-bottom: 2rem;
+  background-color: $dark-beige;
+  border-radius: 4px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   &__title {
-    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid $dark-green;
+    width: fit-content;
+    text-align: center;
   }
 }
 
-.more-button {
+.week-button {
   @include custom-button;
-  position: absolute;
-  bottom: 5rem;
 }
