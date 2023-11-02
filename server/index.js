@@ -5,11 +5,7 @@ const dataRoute = require('./routes/hydration');
 
 const origin = process.env.CORS_ORIGIN;
 
-app.use(
-  cors({
-    options: origin,
-  })
-);
+app.use(cors());
 
 app.use(express.static('public'));
 app.use(express.json());

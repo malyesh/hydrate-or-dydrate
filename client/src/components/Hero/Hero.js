@@ -1,63 +1,60 @@
-import "./Hero.scss";
-import Chart from "chart.js/auto";
-import { CategoryScale } from "chart.js";
-import { useState } from "react";
-import { Data } from "../../utils/data";
-import { Bar } from "react-chartjs-2";
+import './Hero.scss';
+import Chart from 'chart.js/auto';
+import { CategoryScale } from 'chart.js';
+import { useState, useEffect, useRef } from 'react';
+import { Data } from '../../utils/data';
+import BarChart from '../BarChart/BarChart';
+import coffeeImage from '../../assets/images/coffee-bean-for-a-coffee-break-svgrepo-com.svg';
+import waterImage from '../../assets/images/water-drop-svgrepo-com.svg';
+import axios from 'axios';
 
 Chart.register(CategoryScale);
 
 const Hero = () => {
-  const [chartData, setChartData] = useState({
-    labels: Data.map((data) => data.drink),
-    datasets: [
-      {
-        data: Data.map((data) => data.value),
-        backgroundColor: ["#563635", "#80A4ED"],
-        // borderColor: "black",
-        borderWidth: 0,
-      },
-    ],
-  });
+  const [chart, setChart] = useState();
+
+  const handleClickFunction = async (e) => {
+    console.log(e.target.id);
+    // let level = e.target.id;
+
+    const apiBody = process.env.REACT_APP_API_URL;
+    const result = await axios.get(`${apiBody}/hydration/week/2/day/24`);
+
+    console.log(result.data.waterLevel);
+    const newLevel = await axios.patch(`${apiBody}/hydration/week/2/day/24`, {
+      waterLevel: Number(result.data.waterLevel) + 1,
+    });
+  };
+
+  console.log(chart);
 
   return (
-    <div className="hero">
-      <article className="top-banner">
-        <h2 className="banner__text">You are XX% hydrated</h2>
+    <div className='hero'>
+      <article className='top-banner'>
+        <h2 className='banner__text'>You are XX% hydrated</h2>
       </article>
-      <section className="chart">
-        <Bar
-          data={chartData}
-          options={{
-            scales: {
-              xAxes: [
-                {
-                  ticks: { size: 20 },
-                },
-              ],
-            },
-            plugins: {
-              title: {
-                display: true,
-                text: "Hydration",
-              },
-              legend: {
-                display: false,
-                labels: {
-                  font: {
-                    size: 20,
-                  },
-                },
-              },
-            },
-          }}
+      <BarChart />
+      <div className='chart__label'>
+        <img
+          className='chart__label--item'
+          src={coffeeImage}
+          alt='coffee bean'
+          id='coffeeLevel'
+          onClick={handleClickFunction}
         />
-      </section>
-      <article className="hydration">
-        <h3 className="hydration__title">Hydration Status</h3>
+        <img
+          className='chart__label--item'
+          src={waterImage}
+          alt='water cup'
+          id='waterLevel'
+          onClick={handleClickFunction}
+        />
+      </div>
+      <article className='hydration'>
+        <h3 className='hydration__title'>Hydration Status</h3>
         <p>Dehydrated</p>
       </article>
-      <button className="week-button">See weekly progress</button>
+      <button className='week-button'>See weekly progress</button>
     </div>
   );
 };

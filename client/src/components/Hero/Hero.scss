@@ -1,6 +1,6 @@
-@use "../../styles/partials/mixins" as *;
-@use "../../styles/partials/global" as *;
-@use "../../styles/partials/colors" as *;
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/global' as *;
+@use '../../styles/partials/colors' as *;
 
 .hero {
   display: flex;
@@ -15,6 +15,7 @@
 
 .chart {
   padding: 2rem;
+  padding-bottom: 0;
   height: auto;
 }
 
@@ -37,4 +38,16 @@
 
 .week-button {
   @include custom-button;
+}
+
+.chart__label {
+  display: flex;
+  margin-left: 25px;
+  width: 50vw;
+  justify-content: space-between;
+  padding-bottom: 2rem;
+  &--item {
+    height: 50px;
+    // font-size: 40px;
+  }
 }
