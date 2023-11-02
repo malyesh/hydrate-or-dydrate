@@ -29,6 +29,13 @@ const Hero = () => {
         <Bar
           data={chartData}
           options={{
+            scales: {
+              xAxes: [
+                {
+                  ticks: { size: 20 },
+                },
+              ],
+            },
             plugins: {
               title: {
                 display: true,
@@ -36,6 +43,11 @@ const Hero = () => {
               },
               legend: {
                 display: false,
+                labels: {
+                  font: {
+                    size: 20,
+                  },
+                },
               },
             },
           }}
