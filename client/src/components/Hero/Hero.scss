@@ -1,0 +1,34 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/global" as *;
+@use "../../styles/partials/colors" as *;
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+}
+.top-banner {
+  padding: 1rem;
+}
+
+.chart {
+  background-color: white;
+  border-radius: 4px;
+  padding: 1rem;
+  height: auto;
+}
+
+.hydration {
+  padding: 1.5rem;
+
+  &__title {
+    padding-bottom: 0.5rem;
+  }
+}
+
+.more-button {
+  @include custom-button;
+  position: absolute;
+  bottom: 5rem;
+}

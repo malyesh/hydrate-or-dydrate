@@ -1,0 +1,21 @@
+@use "../../styles/partials/colors" as *;
+
+@mixin custom-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: $dark-green;
+  font-size: 0.875rem;
+  font-weight: 700;
+  height: 2.5rem;
+  border-radius: 0.25rem;
+  width: 80%;
+  border: none;
+  padding: 1.5rem 0;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $red;
+  }
+}

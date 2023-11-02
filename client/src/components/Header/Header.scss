@@ -1,0 +1,14 @@
+@use "../../styles/partials/global" as *;
+@use "../../styles/partials/colors" as *;
+
+.header {
+  background-color: $light-green;
+}
+
+.logo-link {
+  text-decoration: none;
+
+  &__text {
+    padding: 1.5rem 0;
+  }
+}
