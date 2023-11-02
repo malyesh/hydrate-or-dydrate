@@ -1,8 +1,12 @@
-@use '../../styles/global' as *;
+@use '../../styles/partials/global' as *;
+@use '../../styles/partials/colors' as *;
 
 .week {
+  &__container {
+    background-color: $light-beige;
+  }
   &__title {
-    padding: 1rem;
+    padding: 2rem 1rem;
     display: flex;
     justify-content: space-evenly;
     align-items: center;

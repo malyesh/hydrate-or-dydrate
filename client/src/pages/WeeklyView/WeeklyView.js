@@ -7,34 +7,32 @@ import './WeeklyView.scss';
 import LineChart from '../../components/LineChart/LineChart';
 
 export default function WeeklyView() {
-  const [allWeeks, setAllWeeks] = useState([]);
   const [currentWeek, setCurrentWeek] = useState(null);
 
   const { weekId } = useParams();
 
-  const apiBody = process.env.REACT_APP_API_URL;
-
-  const getAllWeekData = async () => {
-    const result = await axios.get(`${apiBody}/hydration`);
-    setAllWeeks(result.data);
-
-    const currentWeekId = weekId || result.data[1].id;
-    const selectedWeekData = await axios.get(
-      `${apiBody}/hydration/week/${currentWeekId}`
-    );
-    setCurrentWeek(selectedWeekData.data);
-  };
-
   useEffect(() => {
+    const getAllWeekData = async () => {
+      const apiBody = process.env.REACT_APP_API_URL;
+      const result = await axios.get(`${apiBody}/hydration`);
+
+      const currentWeekId = weekId || result.data[1].id;
+      const selectedWeekData = await axios.get(
+        `${apiBody}/hydration/week/${currentWeekId}`
+      );
+      setCurrentWeek((prevData) => {
+        return selectedWeekData.data;
+      });
+    };
+
     getAllWeekData();
   }, [weekId]);
 
   if (!currentWeek) {
     return <h2>Loading....</h2>;
   }
-  console.log(currentWeek);
   return (
-    <div>
+    <div className='week__container'>
       <div className='week__title'>
         <Link to={'/week/1'}>
           <img
@@ -53,8 +51,8 @@ export default function WeeklyView() {
         </Link>
       </div>
 
-      <div className='week-chart'>
-        <LineChart chartData={currentWeek} />
+      <div className='week__chart'>
+        <LineChart chartData={currentWeek} weekId={weekId} />
       </div>
     </div>
   );

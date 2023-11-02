@@ -1,45 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
-import { useParams } from 'react-router-dom';
 import './LineChart.scss';
 
 export default function LineChart({ chartData }) {
   const [data, setData] = useState(null);
 
-  const { weekId } = useParams();
-
-  console.log(chartData);
-
-  const addChartData = () => {
-    console.log(chartData.days);
-    let labelsArray = chartData.days.map((day) => day.dayOfWeek);
-    let waterValues = chartData.days.map((day) => day.waterLevel);
-    let coffeeValues = chartData.days.map((day) => day.coffeeLevel);
-    // console.log(labelsArray);
-    let chart = {
-      labels: labelsArray,
-      datasets: [
-        {
-          label: 'Coffee Drinked',
-          data: coffeeValues,
-          borderColor: 'brown',
-          backgroundColor: 'brown',
-        },
-        {
-          label: 'Water Drinked',
-          data: waterValues,
-          borderColor: 'blue',
-          backgroundColor: 'blue',
-        },
-      ],
-    };
-    // console.log(chart);
-    setData(chart);
-  };
+  console.table(chartData);
 
   useEffect(() => {
+    const addChartData = async () => {
+      let labelsArray = chartData.days.map((day) => day.dayOfWeek);
+      let waterValues = chartData.days.map((day) => day.waterLevel);
+      let coffeeValues = chartData.days.map((day) => day.coffeeLevel);
+      let chart = {
+        labels: labelsArray,
+        datasets: [
+          {
+            label: 'Coffee Drinked',
+            data: coffeeValues,
+            borderColor: '#563635',
+            backgroundColor: '#563635',
+          },
+          {
+            label: 'Water Drinked',
+            data: waterValues,
+            borderColor: '#80a4ed',
+            backgroundColor: '#80a4ed',
+          },
+        ],
+      };
+      setData(chart);
+    };
     addChartData();
-  }, [weekId]);
+  }, [chartData]);
 
   if (!data) {
     return <h1>Loading...</h1>;
