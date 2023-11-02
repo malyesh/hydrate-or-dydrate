@@ -7,43 +7,50 @@
       {
         "id": "10",
         "dayOfWeek": "Sunday",
-        "drinks": { "Water": "6", "Coffee": "1" },
-        "hydrationLevel": "Hydrated!"
-      },
-      {
-        "id": "10",
-        "dayOfWeek": "Monday",
-        "drinks": { "Water": "4", "Coffee": "3" },
+        "waterLevel": "6",
+        "coffeeLevel": "1",
         "hydrationLevel": "Hydrated!"
       },
       {
         "id": "11",
-        "dayOfWeek": "Tuesday",
-        "drinks": { "Water": "2", "Coffee": "4" },
-        "hydrationLevel": "Dydrated :("
+        "dayOfWeek": "Monday",
+        "waterLevel": "4",
+        "coffeeLevel": "3",
+        "hydrationLevel": "Hydrated!"
       },
       {
         "id": "12",
-        "dayOfWeek": "Wednesday",
-        "drinks": { "Water": "3", "Coffee": "3" },
+        "dayOfWeek": "Tuesday",
+        "waterLevel": "2",
+        "coffeeLevel": "4",
         "hydrationLevel": "Dydrated :("
       },
       {
         "id": "13",
-        "dayOfWeek": "Thursday",
-        "drinks": { "Water": "6", "Coffee": "2" },
-        "hydrationLevel": "Hydrated!"
+        "dayOfWeek": "Wednesday",
+        "waterLevel": "3",
+        "coffeeLevel": "3",
+        "hydrationLevel": "Dydrated :("
       },
       {
         "id": "14",
-        "dayOfWeek": "Friday",
-        "drinks": { "Water": "8", "Coffee": "3" },
+        "dayOfWeek": "Thursday",
+        "waterLevel": "6",
+        "coffeeLevel": "2",
         "hydrationLevel": "Hydrated!"
       },
       {
         "id": "15",
+        "dayOfWeek": "Friday",
+        "waterLevel": "8",
+        "coffeeLevel": "3",
+        "hydrationLevel": "Hydrated!"
+      },
+      {
+        "id": "16",
         "dayOfWeek": "Saturday",
-        "drinks": { "Water": "2", "Coffee": "3" },
+        "waterLevel": "2",
+        "coffeeLevel": "3",
         "hydrationLevel": "Dydrated :("
       }
     ]
@@ -56,43 +63,50 @@
       {
         "id": "20",
         "dayOfWeek": "Sunday",
-        "drinks": { "Water": "0", "Coffee": "0" },
-        "hydrationLevel": "Drink some water!"
+        "waterLevel": "2",
+        "coffeeLevel": "3",
+        "hydrationLevel": "Dydrated :("
       },
       {
         "id": "21",
         "dayOfWeek": "Monday",
-        "drinks": { "Water": "4", "Coffee": "3" },
+        "waterLevel": "4",
+        "coffeeLevel": "3",
         "hydrationLevel": "Hydrated!"
       },
       {
         "id": "22",
         "dayOfWeek": "Tuesday",
-        "drinks": { "Water": "5", "Coffee": "2" },
+        "waterLevel": "5",
+        "coffeeLevel": "2",
         "hydrationLevel": "Hydrated!"
       },
       {
         "id": "23",
         "dayOfWeek": "Wednesday",
-        "drinks": { "Water": "3", "Coffee": "4" },
+        "waterLevel": "3",
+        "coffeeLevel": "4",
         "hydrationLevel": "Dydrated :("
       },
       {
         "id": "24",
         "dayOfWeek": "Thursday",
-        "drinks": { "Water": "0", "Coffee": "0" },
+        "waterLevel": "0",
+        "coffeeLevel": "0",
         "hydrationLevel": "Get Hydrating!"
       },
       {
         "id": "25",
         "dayOfWeek": "Friday",
-        "drinks": { "Water": "0", "Coffee": "0" },
+        "waterLevel": "0",
+        "coffeeLevel": "0",
         "hydrationLevel": "Get Hydrating!"
       },
       {
         "id": "26",
         "dayOfWeek": "Saturday",
-        "drinks": { "Water": "0", "Coffee": "0" },
+        "waterLevel": "0",
+        "coffeeLevel": "0",
         "hydrationLevel": "Get Hydrating!"
       }
     ]

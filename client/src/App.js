@@ -1,9 +1,11 @@
-import "./App.css";
-import Chart from "chart.js/auto";
-import { CategoryScale } from "chart.js";
-import { useState } from "react";
-import { Data } from "./utils/data";
-import { Bar } from "react-chartjs-2";
+import './App.css';
+import Chart from 'chart.js/auto';
+import { CategoryScale } from 'chart.js';
+import { useState } from 'react';
+import { Data } from './utils/data';
+import { Bar } from 'react-chartjs-2';
+import WeeklyView from './pages/WeeklyView/WeeklyView';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 Chart.register(CategoryScale);
 
@@ -13,30 +15,20 @@ function App() {
     datasets: [
       {
         data: Data.map((data) => data.value),
-        backgroundColor: ["brown", "blue"],
-        borderColor: "black",
+        backgroundColor: ['brown', 'blue'],
+        borderColor: 'black',
         borderWidth: 2,
       },
     ],
   });
 
   return (
-    <div className="App">
-      <Bar
-        data={chartData}
-        options={{
-          plugins: {
-            title: {
-              display: true,
-              text: "Hydration",
-            },
-            legend: {
-              display: false,
-            },
-          },
-        }}
-      />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/week' element={<WeeklyView />} />
+        <Route path='/week/:weekId' element={<WeeklyView />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
