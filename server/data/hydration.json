@@ -8,57 +8,50 @@
         "id": "10",
         "date": "10/22/2023",
         "dayOfWeek": "Sunday",
-        "waterLevel": "6",
-        "coffeeLevel": "1",
-        "hydrationLevel": "Hydrated!"
+        "waterLevel": 6,
+        "coffeeLevel": 1
       },
       {
         "id": "11",
         "date": "10/23/2023",
         "dayOfWeek": "Monday",
-        "waterLevel": "4",
-        "coffeeLevel": "3",
-        "hydrationLevel": "Hydrated!"
+        "waterLevel": 4,
+        "coffeeLevel": 3
       },
       {
         "id": "12",
         "date": "10/24/2023",
         "dayOfWeek": "Tuesday",
-        "waterLevel": "2",
-        "coffeeLevel": "4",
-        "hydrationLevel": "Dydrated :("
+        "waterLevel": 2,
+        "coffeeLevel": 4
       },
       {
         "id": "13",
         "date": "10/25/2023",
         "dayOfWeek": "Wednesday",
-        "waterLevel": "3",
-        "coffeeLevel": "3",
-        "hydrationLevel": "Dydrated :("
+        "waterLevel": 3,
+        "coffeeLevel": 3
       },
       {
         "id": "14",
         "date": "10/26/2023",
         "dayOfWeek": "Thursday",
-        "waterLevel": "6",
-        "coffeeLevel": "2",
-        "hydrationLevel": "Hydrated!"
+        "waterLevel": 6,
+        "coffeeLevel": 2
       },
       {
         "id": "15",
         "date": "10/27/2023",
         "dayOfWeek": "Friday",
-        "waterLevel": "8",
-        "coffeeLevel": "3",
-        "hydrationLevel": "Hydrated!"
+        "waterLevel": 8,
+        "coffeeLevel": 3
       },
       {
         "id": "16",
         "date": "10/28/2023",
         "dayOfWeek": "Saturday",
-        "waterLevel": "2",
-        "coffeeLevel": "3",
-        "hydrationLevel": "Dydrated :("
+        "waterLevel": 2,
+        "coffeeLevel": 3
       }
     ]
   },
@@ -71,57 +64,50 @@
         "id": "20",
         "date": "10/29/2023",
         "dayOfWeek": "Sunday",
-        "waterLevel": "2",
-        "coffeeLevel": "3",
-        "hydrationLevel": "Dydrated :("
+        "waterLevel": 2,
+        "coffeeLevel": 3
       },
       {
         "id": "21",
         "date": "10/30/2023",
         "dayOfWeek": "Monday",
-        "waterLevel": "4",
-        "coffeeLevel": "3",
-        "hydrationLevel": "Hydrated!"
+        "waterLevel": 4,
+        "coffeeLevel": 3
       },
       {
         "id": "22",
         "date": "10/31/2023",
         "dayOfWeek": "Tuesday",
-        "waterLevel": "5",
-        "coffeeLevel": "2",
-        "hydrationLevel": "Hydrated!"
+        "waterLevel": 5,
+        "coffeeLevel": 2
       },
       {
         "id": "23",
         "date": "11/01/2023",
         "dayOfWeek": "Wednesday",
-        "waterLevel": "3",
-        "coffeeLevel": "4",
-        "hydrationLevel": "Dydrated :("
+        "waterLevel": 3,
+        "coffeeLevel": 4
       },
       {
         "id": "24",
         "date": "11/02/2023",
         "dayOfWeek": "Thursday",
-        "waterLevel": "0",
-        "coffeeLevel": "0",
-        "hydrationLevel": "Get Hydrating!"
+        "waterLevel": 1,
+        "coffeeLevel": 0
       },
       {
         "id": "25",
         "date": "11/03/2023",
         "dayOfWeek": "Friday",
-        "waterLevel": "0",
-        "coffeeLevel": "0",
-        "hydrationLevel": "Get Hydrating!"
+        "waterLevel": 0,
+        "coffeeLevel": 0
       },
       {
         "id": "26",
         "date": "11/04/2023",
         "dayOfWeek": "Saturday",
-        "waterLevel": "0",
-        "coffeeLevel": "0",
-        "hydrationLevel": "Get Hydrating!"
+        "waterLevel": 0,
+        "coffeeLevel": 0
       }
     ]
   }

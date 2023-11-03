@@ -1,12 +1,13 @@
-@use "../../styles/partials/mixins" as *;
-@use "../../styles/partials/global" as *;
-@use "../../styles/partials/colors" as *;
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/global' as *;
+@use '../../styles/partials/colors' as *;
 
 .hero {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 1rem;
+  padding-top: 0.5rem;
   position: relative;
 }
 .top-banner {
@@ -19,6 +20,7 @@
 
 .chart {
   padding: 2rem;
+  padding-bottom: 0;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -58,5 +60,17 @@
   @include custom-button;
   &:hover {
     background-color: $dark-red;
+  }
+}
+
+.chart__label {
+  display: flex;
+  margin-left: 20px;
+  width: 47vw;
+  justify-content: space-between;
+  padding-bottom: 2rem;
+  &--item {
+    height: 30px;
+    // font-size: 40px;
   }
 }

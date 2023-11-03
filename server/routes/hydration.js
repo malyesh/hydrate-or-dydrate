@@ -43,15 +43,29 @@ router.get('/week/:weekId/day/:dayId', (req, res) => {
   }
 });
 
-// router.patch('/week/:weekId/day/:dayId', (req, res) => {
-//     console.log(req.body);
-//     const { weekId, dayId } = req.params;
-//   const hydrationData = fs.readFileSync(dataFilePath);
+router.patch('/week/2/day/24', (req, res) => {
+  console.log(req.body);
 
-//   const week = JSON.parse(hydrationData).find((week) => week.id == weekId);
-//   const day = week.days.find((day) => day.id == dayId);
+  const hydrationData = JSON.parse(fs.readFileSync(dataFilePath));
 
-//   res.json(req.body);
-// });
+  const weekIndex = hydrationData.findIndex((week) => week.id == '2');
+  const dayIndex = hydrationData[weekIndex].days.findIndex(
+    (day) => day.id == '24'
+  );
+
+  if (req.body.for === 'water') {
+    const newLevel = req.body.waterLevel;
+    hydrationData[weekIndex].days[dayIndex].waterLevel = newLevel;
+  }
+  if (req.body.for === 'coffee') {
+    const newLevel = req.body.coffeeLevel;
+    hydrationData[weekIndex].days[dayIndex].coffeeLevel = newLevel;
+  }
+
+  // console.log(newLevel);
+
+  fs.writeFileSync(dataFilePath, JSON.stringify(hydrationData));
+  res.status(200).json(hydrationData[weekIndex].days[dayIndex]);
+});
 
 module.exports = router;
