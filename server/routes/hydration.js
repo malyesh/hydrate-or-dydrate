@@ -46,8 +46,6 @@ router.get('/week/:weekId/day/:dayId', (req, res) => {
 router.patch('/week/2/day/24', (req, res) => {
   console.log(req.body);
 
-  const newLevel = req.body.waterLevel;
-  //   const { weekId, dayId } = req.params;
   const hydrationData = JSON.parse(fs.readFileSync(dataFilePath));
 
   const weekIndex = hydrationData.findIndex((week) => week.id == '2');
@@ -55,10 +53,19 @@ router.patch('/week/2/day/24', (req, res) => {
     (day) => day.id == '24'
   );
 
-  hydrationData[weekIndex].days[dayIndex].waterLevel = newLevel;
+  if (req.body.for === 'water') {
+    const newLevel = req.body.waterLevel;
+    hydrationData[weekIndex].days[dayIndex].waterLevel = newLevel;
+  }
+  if (req.body.for === 'coffee') {
+    const newLevel = req.body.coffeeLevel;
+    hydrationData[weekIndex].days[dayIndex].coffeeLevel = newLevel;
+  }
+
+  // console.log(newLevel);
 
   fs.writeFileSync(dataFilePath, JSON.stringify(hydrationData));
-  res.status(200).json(hydrationData);
+  res.status(200).json(hydrationData[weekIndex].days[dayIndex]);
 });
 
 module.exports = router;

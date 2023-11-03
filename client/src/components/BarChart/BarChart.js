@@ -1,36 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { Data } from '../../utils/data';
-
+import axios from 'axios';
 import './BarChart.scss';
 
-export default function BarChart({ currentDay }) {
-  const [chartData, setChartData] = useState();
-
-  let addChartData = async () => {
-    let labelsArray = ['', ''];
-    let waterValue = currentDay.waterLevel;
-    let coffeeValue = currentDay.coffeeLevel;
-
-    let chart = {
-      labels: labelsArray,
-      datasets: [
-        { data: coffeeValue, backgroundColor: '#563635' },
-        { data: waterValue, backgroundColor: '#80a4ED' },
-      ],
-    };
-
-    setChartData(chart);
-    // console.log(chart);
+export default function BarChart({ currentDay, waterLvl, coffeeLvl }) {
+  const chartData = {
+    labels: ['', ''],
+    datasets: [
+      {
+        label: 'hydration',
+        data: [coffeeLvl, waterLvl],
+        backgroundColor: ['#563635', '#80a4ED'],
+      },
+    ],
   };
-
-  useEffect(() => {
-    // getCurrentDay(dayId);
-    addChartData();
-  }, [currentDay]);
-
   return (
     <section className='chart'>
+      <h2 className='chart__title'>HYDRATION LEVELS</h2>
       <Bar
         data={chartData}
         options={{
@@ -45,16 +31,11 @@ export default function BarChart({ currentDay }) {
           },
           plugins: {
             title: {
-              display: true,
+              display: false,
               text: 'Hydration',
             },
             legend: {
               display: false,
-              labels: {
-                font: {
-                  size: 20,
-                },
-              },
             },
           },
         }}
