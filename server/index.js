@@ -3,7 +3,7 @@ const cors = require('cors');
 const app = express();
 const dataRoute = require('./routes/hydration');
 
-const origin = process.env.CORS_ORIGIN;
+const origin = 'http://localhost:3000';
 
 app.use(
   cors({
