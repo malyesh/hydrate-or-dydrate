@@ -1,7 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
+require("dotenv").config();
 const dataRoute = require("./routes/hydration");
+const authRoute = require("./routes/user-auth");
 
 const origin = "http://localhost:3000";
 
@@ -20,6 +22,7 @@ app.get("/", (req, res) => {
   res.send("Welcome to Hydrate or Dydrate");
 });
 
+app.use("/auth", authRoute);
 app.use("/hydration", dataRoute);
 
 app.listen(8080, function () {
