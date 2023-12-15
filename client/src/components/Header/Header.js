@@ -10,23 +10,25 @@ const Header = () => {
 
   return (
     <header className="header">
-      {!isUserAuthPage && (
-        <Link to="/home" className="logo-link">
-          <div className="logo">
-            <h1 className="logo__text">HYDRATE 💦</h1>
-            <h1 className="logo__text">OR DYDRATE</h1>
-          </div>
-        </Link>
-      )}
-      {isUserAuthPage && (
-        <Link to="/" className="logo-link">
-          <div className="logo">
-            <h1 className="logo__text">HYDRATE 💦</h1>
-            <h1 className="logo__text">OR DYDRATE</h1>
-          </div>
-        </Link>
-      )}
-      {!isUserAuthPage && <Logout />}
+      <div className="header__container">
+        {!isUserAuthPage && (
+          <Link to="/home" className="logo-link">
+            <div className="logo">
+              <h1 className="logo__text">HYDRATE 💦</h1>
+              <h1 className="logo__text">OR DYDRATE</h1>
+            </div>
+          </Link>
+        )}
+        {isUserAuthPage && (
+          <Link to="/" className="logo-link">
+            <div className="logo">
+              <h1 className="logo__text">HYDRATE 💦</h1>
+              <h1 className="logo__text">OR DYDRATE</h1>
+            </div>
+          </Link>
+        )}
+        {!isUserAuthPage && <Logout />}
+      </div>
     </header>
   );
 };
