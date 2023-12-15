@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './SignupPage.scss';
 
 const initialValues = {
@@ -12,6 +13,11 @@ const initialValues = {
 
 export default function SignupPage() {
   const [values, setValues] = useState(initialValues);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+
+  const apiBody = process.env.REACT_APP_API_URL;
+  const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -21,22 +27,49 @@ export default function SignupPage() {
     });
   };
 
-  const handleSignup = (event) => {
+  const handleSignup = async (event) => {
     event.preventDefault();
+    if (
+      !values.first_name ||
+      !values.last_name ||
+      !values.email ||
+      !values.password ||
+      !values.confirm_password
+    ) {
+      setError('please fill out all form fields!');
+      return;
+    }
     if (event.target.password.value === event.target.confirm_password.value) {
+      setError('');
       let userInput = {
         first_name: values.first_name,
         last_name: values.last_name,
         email: values.email,
         password: values.password,
       };
-      console.log(userInput);
+      try {
+        await axios.post(`${apiBody}/auth/register`, userInput);
+        setSuccess('you have successfully been registered!');
+
+        setTimeout(() => {
+          navigate('/login');
+        }, 2000);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      setError('password and password confirmation must match');
+      return;
     }
   };
 
   return (
     <div className='signup'>
       <h1 className='signup__title'>Sign Up</h1>
+
+      {error && <div className='signup__error'></div>}
+
+      {success && <div className='signup__success'></div>}
 
       <form className='signup__form' onSubmit={handleSignup}>
         <div className='signup__field'>

@@ -39,7 +39,17 @@
       background-color: $dark-red;
     }
   }
-  &__signup {
+  &__login {
     font-size: 12px;
+  }
+  &__error {
+    font-size: 10px;
+    color: red;
+    padding-top: 8px;
+  }
+  &__success {
+    font-size: 10px;
+    color: green;
+    padding-top: 8px;
   }
 }

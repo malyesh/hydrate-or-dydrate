@@ -1,10 +1,16 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import axios from 'axios';
 import './LoginPage.scss';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+
+  const apiBody = process.env.REACT_APP_API_URL;
+  const navigate = useNavigate();
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -14,15 +20,33 @@ export default function LoginPage() {
     setPassword(event.target.value);
   };
 
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
-    console.log(email);
-    console.log(password);
+    try {
+      const response = await axios.post(`${apiBody}/auth/login`, {
+        email: email,
+        password: password,
+      });
+      setError('');
+      setSuccess('you have successfully logged in!');
+      let token = response.data.token;
+      sessionStorage.setItem('token', token);
+
+      setTimeout(() => {
+        navigate('/home');
+      }, 2000);
+    } catch (error) {
+      setError('email and password do not match');
+    }
   };
 
   return (
     <div className='login'>
       <h1 className='login__title'>Log In</h1>
+
+      {error && <div className='login__error'>{error}</div>}
+
+      {success && <div className='login__success'>{success}</div>}
 
       <form className='login__form' onSubmit={handleLogin}>
         <div className='login__field'>
