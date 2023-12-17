@@ -1,5 +1,5 @@
-@use './fonts' as *;
-@use './colors' as *;
+@use "./fonts" as *;
+@use "./colors" as *;
 
 * {
   box-sizing: border-box;
@@ -9,25 +9,31 @@
 }
 
 body {
-  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
   color: $dark-green;
   background-color: $light-beige;
 }
 
-h1 {
-  font-family: 'Fashion Fetish';
-  font-size: 18px;
+.logo__text {
+  font-family: "Fashion Fetish";
+  font-size: 14px;
   font-weight: 700;
   color: $dark-green;
+  line-height: 1.5rem;
 }
 
-h2 {
+h1 {
   font-size: 20px;
   font-weight: 600;
 }
 
+h2 {
+  font-size: 15px;
+  font-weight: 600;
+}
+
 h3 {
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 600;
 }
 

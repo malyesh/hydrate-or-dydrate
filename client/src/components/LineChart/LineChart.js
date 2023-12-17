@@ -41,6 +41,7 @@ export default function LineChart({ chartData }) {
   return (
     <div className="chart-container">
       <Line
+        className="line-chart"
         data={data}
         width={"80%"}
         height={"80%"}
@@ -51,6 +52,24 @@ export default function LineChart({ chartData }) {
             },
             legend: {
               display: false,
+            },
+          },
+          scales: {
+            x: {
+              ticks: {
+                font: {
+                  size: 11,
+                  family: '"Poppins", Arial, Helvetica, sans-serif',
+                },
+              },
+            },
+            y: {
+              ticks: {
+                font: {
+                  size: 11,
+                  family: '"Poppins", Arial, Helvetica, sans-serif',
+                },
+              },
             },
           },
         }}
