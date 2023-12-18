@@ -15,6 +15,7 @@ const Hero = () => {
   const [currentDay, setCurrentDay] = useState(new Date());
   const { dayId } = useParams();
   const defaultDayId = '24';
+  const [currentLevel, setCurrentLevel] = useState();
   const [water, setWater] = useState();
   const [coffee, setCoffee] = useState();
   const [status, setStatus] = useState('Get Hydrating!');
@@ -37,64 +38,50 @@ const Hero = () => {
           },
         });
       }
+      setCurrentLevel(response.data[0]);
       setWater(response.data[0].waterLevel);
       setCoffee(response.data[0].coffeeLevel);
     };
     getUserData();
-  }, [token, apiBody]);
+  }, [token, apiBody, coffee, water, currentLevel]);
 
-  // const handleClickFunctionCoffee = async (e) => {
-  //   const apiBody = process.env.REACT_APP_API_URL;
-  //   const result = await axios.get(`${apiBody}/hydration/week/2/day/24`);
-  //   try {
-  //     const newLevel = await axios.patch(`${apiBody}/hydration/week/2/day/24`, {
-  //       coffeeLevel: result.data.coffeeLevel + 1,
-  //       for: 'coffee',
-  //     });
-  //     setCoffee(newLevel.data.coffeeLevel);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const handleClickFunctionCoffee = async (e) => {
+    const apiBody = process.env.REACT_APP_API_URL;
 
-  // const handleClickFunctionWater = async (e) => {
-  //   const apiBody = process.env.REACT_APP_API_URL;
-  //   const result = await axios.get(`${apiBody}/hydration/week/2/day/24`);
-  //   try {
-  //     const newLevel = await axios.patch(`${apiBody}/hydration/week/2/day/24`, {
-  //       waterLevel: result.data.waterLevel + 1,
-  //       for: 'water',
-  //     });
-  //     setWater(newLevel.data.waterLevel);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+    try {
+      await axios.patch(`${apiBody}/hydration/coffee`, {
+        id: currentLevel.id,
+        coffeeLevel: coffee,
+      });
+      setCoffee(coffee + 1);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  // const getCurrentDay = async () => {
-  //   const apiBody = process.env.REACT_APP_API_URL;
-  //   const currentDayId = dayId || defaultDayId;
-  //   const result = await axios.get(
-  //     `${apiBody}/hydration/week/2/day/${currentDayId}`
-  //   );
-  //   setCurrentDay(result.data);
-  //   setWater(result.data.waterLevel);
-  //   setCoffee(result.data.coffeeLevel);
+  const handleClickFunctionWater = async (e) => {
+    const apiBody = process.env.REACT_APP_API_URL;
 
-  //   if (water > coffee) {
-  //     setStatus('Hydrated!');
-  //   }
-  //   if (water < coffee) {
-  //     setStatus('Dydrated :(');
-  //   }
-  //   if (water === coffee) {
-  //     setStatus('Hydrate or Dydrate!');
-  //   }
-  // };
+    try {
+      await axios.patch(`${apiBody}/hydration/water`, {
+        id: currentLevel.id,
+        waterLevel: water,
+      });
+      setWater(water + 1);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  // useEffect(() => {
-  //   getCurrentDay();
-  // }, [dayId, water, coffee]);
+  useEffect(() => {
+    if (water > coffee) {
+      setStatus('Hydrated!');
+    } else if (coffee > water) {
+      setStatus('Dydrated :(');
+    } else {
+      setStatus('Hydrate or Dydrate!');
+    }
+  }, [water, coffee]);
 
   if (!currentDay) return <h2>loading</h2>;
 
@@ -112,14 +99,14 @@ const Hero = () => {
           src={coffeeImage}
           alt='coffee bean'
           id='coffeeLevel'
-          // onClick={handleClickFunctionCoffee}
+          onClick={handleClickFunctionCoffee}
         />
         <img
           className='chart__label--item'
           src={waterImage}
           alt='water cup'
           id='waterLevel'
-          // onClick={handleClickFunctionWater}
+          onClick={handleClickFunctionWater}
         />
       </div>
       <article className='hydration'>

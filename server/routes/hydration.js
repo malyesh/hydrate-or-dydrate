@@ -48,22 +48,35 @@ router.post('/', authenticate, async (req, res) => {
   }
 });
 
-// router.patch('/', authenticate, async (req, res) => {
-//   console.log(req.user_id);
+router.patch('/coffee', async (req, res) => {
+  const { id, coffeeLevel } = req.body;
 
-//   const newLevel = {
-//     waterLevel: 0,
-//     coffeeLevel: 0,
-//     user_id: req.user_id,
-//   };
+  try {
+    await knex('hydration')
+      .where({ id, id })
+      .update({
+        coffeeLevel: coffeeLevel + 1,
+      });
+    res.status(201).send('Updated successfully');
+  } catch (error) {
+    res.status(400).send('Failed to update');
+  }
+});
 
-//   try {
-//     await knex('hydration').insert(newLevel);
-//     res.status(201).send('Added successfully');
-//   } catch (error) {
-//     res.status(400).send('Failed addition');
-//   }
-// });
+router.patch('/water', async (req, res) => {
+  const { id, waterLevel } = req.body;
+
+  try {
+    await knex('hydration')
+      .where({ id, id })
+      .update({
+        waterLevel: waterLevel + 1,
+      });
+    res.status(201).send('Updated successfully');
+  } catch (error) {
+    res.status(400).send('Failed to update');
+  }
+});
 
 // router.get('/', (req, res) => {
 //   console.log('GET all videos');
