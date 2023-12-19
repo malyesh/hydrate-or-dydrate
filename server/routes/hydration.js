@@ -31,18 +31,7 @@ router.post('/', authenticate, async (req, res) => {
 
   try {
     await knex('hydration').insert(newLevel);
-
-    let today = new Date().toLocaleDateString();
-    today = `${today.substring(6)}-${today.substring(0, 2)}-${today.substring(
-      3,
-      5
-    )}`;
-    const levels = await knex
-      .select('*')
-      .from('hydration')
-      .where(knex.raw('CAST(created_at AS DATE) = ?', [today]))
-      .where({ user_id: req.user_id });
-    return res.status(200).json(levels);
+    res.status(200).send('Added successfully');
   } catch (error) {
     res.status(400).send('Failed addition');
   }

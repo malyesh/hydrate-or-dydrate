@@ -12,45 +12,52 @@ import { Bar } from 'react-chartjs-2';
 Chart.register(CategoryScale);
 
 const Hero = () => {
-  const [currentDay, setCurrentDay] = useState(new Date());
-  const { dayId } = useParams();
-  const defaultDayId = '24';
-  const [currentLevel, setCurrentLevel] = useState();
+  const [currentDay, setCurrentDay] = useState({});
   const [water, setWater] = useState();
   const [coffee, setCoffee] = useState();
   const [status, setStatus] = useState('Get Hydrating!');
 
   const apiBody = process.env.REACT_APP_API_URL;
   const token = sessionStorage.getItem('token');
+  const today = new Date().toLocaleDateString().substring(0, 10);
 
   useEffect(() => {
+    const createCurrentRow = async () => {
+      await axios.post(
+        `${apiBody}/hydration`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      getUserData();
+    };
     const getUserData = async () => {
-      let response;
-      response = await axios.get(`${apiBody}/hydration`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (!response.data[0]) {
-        response = await axios.post(`${apiBody}/hydration`, {
+      try {
+        let response = await axios.get(`${apiBody}/hydration`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
+        setCurrentDay(response.data[0]);
+        setWater(response.data[0].waterLevel);
+        setCoffee(response.data[0].coffeeLevel);
+      } catch (e) {
+        console.log('needs new row');
+        createCurrentRow();
       }
-      setCurrentLevel(response.data[0]);
-      setWater(response.data[0].waterLevel);
-      setCoffee(response.data[0].coffeeLevel);
     };
     getUserData();
-  }, [token, apiBody, coffee, water, currentLevel]);
+  }, [token, apiBody, coffee, water]);
 
   const handleClickFunctionCoffee = async (e) => {
     const apiBody = process.env.REACT_APP_API_URL;
 
     try {
       await axios.patch(`${apiBody}/hydration/coffee`, {
-        id: currentLevel.id,
+        id: currentDay.id,
         coffeeLevel: coffee,
       });
       setCoffee(coffee + 1);
@@ -64,7 +71,7 @@ const Hero = () => {
 
     try {
       await axios.patch(`${apiBody}/hydration/water`, {
-        id: currentLevel.id,
+        id: currentDay.id,
         waterLevel: water,
       });
       setWater(water + 1);
@@ -88,11 +95,9 @@ const Hero = () => {
   return (
     <div className='hero'>
       <article className='top-banner'>
-        <h2 className='top-banner__text1'>{`${currentDay
-          .toLocaleDateString()
-          .substring(0, 10)}`}</h2>
+        <h2 className='top-banner__text1'>{`${today}`}</h2>
       </article>
-      <BarChart currentDay={currentDay} waterLvl={water} coffeeLvl={coffee} />
+      <BarChart waterLvl={water} coffeeLvl={coffee} />
       <div className='chart__label'>
         <img
           className='chart__label--item'
