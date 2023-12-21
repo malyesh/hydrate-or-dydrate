@@ -84,6 +84,11 @@
     width: 30rem;
   }
 
+  @include desktop {
+    width: auto;
+    padding: 1.5rem 3rem;
+  }
+
   &:hover {
     background-color: $dark-red;
   }
