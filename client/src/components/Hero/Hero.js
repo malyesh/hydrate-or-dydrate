@@ -6,6 +6,8 @@ import { Link, useParams } from 'react-router-dom';
 import BarChart from '../BarChart/BarChart';
 import coffeeImage from '../../assets/images/coffee-bean-for-a-coffee-break-svgrepo-com.svg';
 import waterImage from '../../assets/images/water-drop-svgrepo-com.svg';
+import rightArrow from '../../assets/arrow-right-3098.svg';
+import leftArrow from '../../assets/arrow-left-3099.svg';
 import axios from 'axios';
 import { Bar } from 'react-chartjs-2';
 
@@ -95,7 +97,9 @@ const Hero = () => {
   return (
     <div className='hero'>
       <article className='top-banner'>
+        <img src={leftArrow} alt='left arrow' className='top-banner__arrow' />
         <h2 className='top-banner__text1'>{`${today}`}</h2>
+        <img src={rightArrow} alt='right arrow' className='top-banner__arrow' />
       </article>
       <BarChart waterLvl={water} coffeeLvl={coffee} />
       <div className='chart__label'>

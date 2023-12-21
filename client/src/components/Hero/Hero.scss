@@ -1,7 +1,7 @@
-@use "../../styles/partials/mixins" as *;
-@use "../../styles/partials/global" as *;
-@use "../../styles/partials/colors" as *;
-@use "../../styles/partials/variables" as *;
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/global' as *;
+@use '../../styles/partials/colors' as *;
+@use '../../styles/partials/variables' as *;
 
 .hero {
   display: flex;
@@ -24,9 +24,14 @@
   border-radius: 4px;
   width: 90%;
   text-align: center;
-
+  display: flex;
+  justify-content: space-between;
   @include tablet {
     width: 30rem;
+  }
+  &__arrow {
+    width: 0.75rem;
+    margin: 0 1rem;
   }
 }
 
