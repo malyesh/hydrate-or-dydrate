@@ -68,7 +68,7 @@ router.patch("/water", async (req, res) => {
 });
 
 router.get(
-  "/week/startDate/:startDate/endDate/:endDate",
+  "/week/startOfWeek/:startOfWeek/endOfWeek/:endOfWeek",
   authenticate,
   async (req, res) => {
     const { startOfWeek } = req.params;

@@ -44,7 +44,7 @@ export default function WeeklyView() {
     const getAllWeekData = async () => {
       try {
         const result = await axios.get(
-          `${apiBody}/hydration/week/starOfWeek/${startOfWeek}/endOfWeek/${endOfWeek}`,
+          `${apiBody}/hydration/week/startOfWeek/${startOfWeek}/endOfWeek/${endOfWeek}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
