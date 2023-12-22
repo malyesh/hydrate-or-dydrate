@@ -7,44 +7,24 @@ import "./WeeklyView.scss";
 import LineChart from "../../components/LineChart/LineChart";
 
 export default function WeeklyView() {
-  // const [currentWeek, setCurrentWeek] = useState(null);
-
   const apiBody = process.env.REACT_APP_API_URL;
   const token = sessionStorage.getItem("token");
 
-  const today = new Date().toLocaleDateString().substring(0, 10);
+  const today = new Date();
   let startOfWeek = new Date(today);
   startOfWeek.setDate(today.getDate() - today.getDay());
   let endOfWeek = new Date(startOfWeek);
   endOfWeek.setDate(startOfWeek.getDate() + 6);
 
-  const [firstDay, setFirstDay] = useState(today);
-  const [lastDay, setLastDay] = useState(today + 6);
+  const [firstDay, setFirstDay] = useState(startOfWeek);
+  const [lastDay, setLastDay] = useState(endOfWeek);
+  const [weekData, setWeekData] = useState([]);
 
   useEffect(() => {
-    // const getAllWeekData = async () => {
-    //   await axios.get(
-    //     `${apiBody}/hydration/week/startOfWeek/${startOfWeek}/endOfWeek/${endOfWeek}`,
-    //     {
-    //       headers: {
-    //         Authorization: `Bearer ${token}`,
-    //       },
-    //     }
-    //   );
-    //   // const currentWeekId = weekId || result.data[1].id;
-    //   // const selectedWeekData = await axios.get(
-    //   //   `${apiBody}/hydration/week/${currentWeekId}`
-    //   // );
-    //   // setCurrentWeek((prevData) => {
-    //   //   return selectedWeekData.data;
-    //   // });
-    //   return selectedWeekData.data();
-    // };
-
     const getAllWeekData = async () => {
       try {
         const result = await axios.get(
-          `${apiBody}/hydration/week/startOfWeek/${startOfWeek}/endOfWeek/${endOfWeek}`,
+          `${apiBody}/hydration/week/startOfWeek/${startOfWeek.toISOString()}/endOfWeek/${endOfWeek.toISOString()}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -52,32 +32,17 @@ export default function WeeklyView() {
           }
         );
         setFirstDay(startOfWeek);
-        setLastDay(startOfWeek + 6);
+        setLastDay(endOfWeek);
+        setWeekData(result.data);
+        console.log(result.data.id);
       } catch (e) {
-        console.log("needs new row");
+        console.log("error fetching weekly data", e);
       }
     };
     getAllWeekData();
-  }, [token, apiBody]);
+  }, [token, apiBody, startOfWeek, endOfWeek]);
 
-  // useEffect(() => {
-  //   const getAllWeekData = async () => {
-  //     const apiBody = process.env.REACT_APP_API_URL;
-  //     const result = await axios.get(`${apiBody}/hydration`);
-
-  //     const currentWeekId = weekId || result.data[1].id;
-  //     const selectedWeekData = await axios.get(
-  //       `${apiBody}/hydration/week/${currentWeekId}`
-  //     );
-  //     setCurrentWeek((prevData) => {
-  //       return selectedWeekData.data;
-  //     });
-  //   };
-
-  //   getAllWeekData();
-  // }, [weekId]);
-
-  if (!currentWeek) {
+  if (!weekData) {
     return <h2>Loading....</h2>;
   }
   return (
@@ -101,7 +66,7 @@ export default function WeeklyView() {
       </div>
 
       <div className="week__chart">
-        <LineChart chartData={currentWeek} />
+        <LineChart chartData={weekData} />
       </div>
     </div>
   );

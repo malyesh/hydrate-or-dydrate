@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import "./LineChart.scss";
+import isEqual from "lodash/isEqual";
 
 export default function LineChart({ chartData }) {
   const [data, setData] = useState(null);
@@ -9,9 +10,9 @@ export default function LineChart({ chartData }) {
 
   useEffect(() => {
     const addChartData = async () => {
-      let labelsArray = chartData.days.map((day) => day.dayOfWeek);
-      let waterValues = chartData.days.map((day) => day.waterLevel);
-      let coffeeValues = chartData.days.map((day) => day.coffeeLevel);
+      let labelsArray = chartData.map((day) => day.created_at);
+      let waterValues = chartData.map((day) => day.waterLevel);
+      let coffeeValues = chartData.map((day) => day.coffeeLevel);
       let chart = {
         labels: labelsArray,
         datasets: [
@@ -29,7 +30,9 @@ export default function LineChart({ chartData }) {
           },
         ],
       };
-      setData(chart);
+      {
+        setData(chart);
+      }
     };
     addChartData();
   }, [chartData]);
