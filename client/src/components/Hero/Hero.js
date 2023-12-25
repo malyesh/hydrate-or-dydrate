@@ -101,6 +101,12 @@ const Hero = () => {
     setDay(yesterday);
   };
 
+  const handleFrontClick = async () => {
+    const tomorrow = new Date(day);
+    tomorrow.setDate(day.getDate() + 1);
+    setDay(tomorrow);
+  };
+
   useEffect(() => {
     if (water > coffee) {
       setStatus('Hydrated!');
@@ -129,6 +135,7 @@ const Hero = () => {
           src={rightArrow}
           alt='right arrow'
           className={`top-banner__arrow ${isToday ? 'hide' : ''}`}
+          onClick={handleFrontClick}
         />
       </article>
       <BarChart waterLvl={water} coffeeLvl={coffee} />
