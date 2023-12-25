@@ -19,10 +19,11 @@ const Hero = () => {
   const [coffee, setCoffee] = useState();
   const [status, setStatus] = useState('Get Hydrating!');
   const [day, setDay] = useState(new Date());
+  const [isToday, setIsToday] = useState(true);
 
   const apiBody = process.env.REACT_APP_API_URL;
   const token = sessionStorage.getItem('token');
-  const today = new Date().toLocaleDateString().substring(0, 10);
+  // const today = new Date().toLocaleDateString().substring(0, 10);
 
   useEffect(() => {
     const createCurrentRow = async () => {
@@ -52,14 +53,19 @@ const Hero = () => {
         setCurrentDay(response.data[0]);
         setWater(response.data[0].waterLevel);
         setCoffee(response.data[0].coffeeLevel);
-        // setDay(today);
+        const today = new Date();
+        if (day.toDateString() === today.toDateString()) {
+          setIsToday(true);
+        } else {
+          setIsToday(false);
+        }
       } catch (e) {
         console.log('needs new row');
         createCurrentRow();
       }
     };
     getUserData();
-  }, [token, apiBody, coffee, water, day]);
+  }, [token, apiBody, coffee, water, day, isToday]);
 
   const handleClickFunctionCoffee = async (e) => {
     const apiBody = process.env.REACT_APP_API_URL;
@@ -119,7 +125,11 @@ const Hero = () => {
         <h2 className='top-banner__text1'>{`${day
           .toLocaleDateString()
           .substring(0, 10)}`}</h2>
-        <img src={rightArrow} alt='right arrow' className='top-banner__arrow' />
+        <img
+          src={rightArrow}
+          alt='right arrow'
+          className={`top-banner__arrow ${isToday ? 'hide' : ''}`}
+        />
       </article>
       <BarChart waterLvl={water} coffeeLvl={coffee} />
       <div className='chart__label'>

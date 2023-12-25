@@ -121,3 +121,9 @@
     transform: translate(5px, 5px);
   }
 }
+
+.hide {
+  // position: relative;
+  // display: none;
+  visibility: hidden;
+}
