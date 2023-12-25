@@ -18,6 +18,7 @@ const Hero = () => {
   const [water, setWater] = useState();
   const [coffee, setCoffee] = useState();
   const [status, setStatus] = useState('Get Hydrating!');
+  const [day, setDay] = useState(new Date());
 
   const apiBody = process.env.REACT_APP_API_URL;
   const token = sessionStorage.getItem('token');
@@ -26,7 +27,7 @@ const Hero = () => {
   useEffect(() => {
     const createCurrentRow = async () => {
       await axios.post(
-        `${apiBody}/hydration`,
+        `${apiBody}/hydration/${day.toISOString()}`,
         {},
         {
           headers: {
@@ -35,24 +36,30 @@ const Hero = () => {
         }
       );
       getUserData();
+      // console.log('done');
     };
     const getUserData = async () => {
+      // console.log(day.toISOString());
       try {
-        let response = await axios.get(`${apiBody}/hydration`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        let response = await axios.get(
+          `${apiBody}/hydration/${day.toISOString()}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         setCurrentDay(response.data[0]);
         setWater(response.data[0].waterLevel);
         setCoffee(response.data[0].coffeeLevel);
+        // setDay(today);
       } catch (e) {
         console.log('needs new row');
         createCurrentRow();
       }
     };
     getUserData();
-  }, [token, apiBody, coffee, water]);
+  }, [token, apiBody, coffee, water, day]);
 
   const handleClickFunctionCoffee = async (e) => {
     const apiBody = process.env.REACT_APP_API_URL;
@@ -82,6 +89,12 @@ const Hero = () => {
     }
   };
 
+  const handleBackClick = async () => {
+    const yesterday = new Date(day);
+    yesterday.setDate(day.getDate() - 1);
+    setDay(yesterday);
+  };
+
   useEffect(() => {
     if (water > coffee) {
       setStatus('Hydrated!');
@@ -97,8 +110,15 @@ const Hero = () => {
   return (
     <div className='hero'>
       <article className='top-banner'>
-        <img src={leftArrow} alt='left arrow' className='top-banner__arrow' />
-        <h2 className='top-banner__text1'>{`${today}`}</h2>
+        <img
+          src={leftArrow}
+          alt='left arrow'
+          className='top-banner__arrow'
+          onClick={handleBackClick}
+        />
+        <h2 className='top-banner__text1'>{`${day
+          .toLocaleDateString()
+          .substring(0, 10)}`}</h2>
         <img src={rightArrow} alt='right arrow' className='top-banner__arrow' />
       </article>
       <BarChart waterLvl={water} coffeeLvl={coffee} />
