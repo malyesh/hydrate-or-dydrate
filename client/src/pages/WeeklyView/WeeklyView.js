@@ -31,6 +31,13 @@ export default function WeeklyView() {
             },
           }
         );
+
+        const processedData = fillMissingDays(
+          result.data,
+          startOfWeek,
+          endOfWeek
+        );
+
         setFirstDay(startOfWeek);
         setLastDay(endOfWeek);
         setWeekData(result.data);
@@ -44,6 +51,34 @@ export default function WeeklyView() {
   if (!weekData) {
     return <h2>Loading....</h2>;
   }
+
+  const getDaysOfWeek = (startOfWeek, endOfWeek) => {
+    const days = [];
+    const currentDay = new Date(startOfWeek);
+    while (currentDay <= endOfWeek) {
+      days.push(new Date(currentDay));
+      currentDay.setDate(currentDay.getDate() + 1);
+    }
+    return days;
+  };
+
+  const fillMissingDays = (data, startOfWeek, endOfWeek) => {
+    const daysOfWeek = getDaysOfWeek(startOfWeek, endOfWeek);
+    const processedData = daysOfWeek.map((day) => {
+      const matchingData = data.find(
+        (item) => new Date(item.created_at).getTime() === day.getTime()
+      );
+      return (
+        matchingData || {
+          created_at: day.toISOString(),
+          waterLevel: 0,
+          coffeeLevel: 0,
+        }
+      );
+    });
+    return processedData;
+  };
+
   return (
     <div className="week__container">
       <div className="week__title">
