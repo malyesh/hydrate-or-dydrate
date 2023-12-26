@@ -10,7 +10,9 @@ export default function LineChart({ chartData }) {
 
   useEffect(() => {
     const addChartData = async () => {
-      let labelsArray = chartData.map((day) => day.created_at);
+      let labelsArray = chartData.map((day) =>
+        new Date(day.created_at).toDateString()
+      );
       let waterValues = chartData.map((day) => day.waterLevel);
       let coffeeValues = chartData.map((day) => day.coffeeLevel);
       let chart = {

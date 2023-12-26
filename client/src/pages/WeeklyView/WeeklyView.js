@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, matchRoutes, useParams } from "react-router-dom";
 import axios from "axios";
 import rightArrow from "../../assets/arrow-right-3098.svg";
 import leftArrow from "../../assets/arrow-left-3099.svg";
@@ -40,7 +40,7 @@ export default function WeeklyView() {
 
         setFirstDay(startOfWeek);
         setLastDay(endOfWeek);
-        setWeekData(result.data);
+        setWeekData(processedData);
       } catch (e) {
         console.log("error fetching weekly data", e);
       }
@@ -66,15 +66,21 @@ export default function WeeklyView() {
     const daysOfWeek = getDaysOfWeek(startOfWeek, endOfWeek);
     const processedData = daysOfWeek.map((day) => {
       const matchingData = data.find(
-        (item) => new Date(item.created_at).getTime() === day.getTime()
+        (item) =>
+          new Date(item.created_at).toDateString() === day.toDateString()
       );
-      return (
-        matchingData || {
-          created_at: day.toISOString(),
-          waterLevel: 0,
-          coffeeLevel: 0,
-        }
-      );
+
+      if (matchingData) {
+        return matchingData;
+      }
+
+      console.log("Matching Data:", matchingData);
+      console.log("Day:", day);
+      return {
+        created_at: day.toISOString(),
+        waterLevel: 0,
+        coffeeLevel: 0,
+      };
     });
     return processedData;
   };
