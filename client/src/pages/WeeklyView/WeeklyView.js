@@ -34,7 +34,6 @@ export default function WeeklyView() {
         setFirstDay(startOfWeek);
         setLastDay(endOfWeek);
         setWeekData(result.data);
-        console.log(result.data.id);
       } catch (e) {
         console.log("error fetching weekly data", e);
       }
