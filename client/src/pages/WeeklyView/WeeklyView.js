@@ -92,27 +92,29 @@ export default function WeeklyView() {
   }
 
   return (
-    <div className='week__container'>
-      <div className='week__title'>
-        <Link to={'/week/1'}>
-          <img
-            src={leftArrow}
-            alt='left arrow'
-            className='week__title--arrow'
-          />
-        </Link>
-        <h2>{`${firstDay.toLocaleDateString()} - ${lastDay.toLocaleDateString()}`}</h2>
-        <Link to={`/week/2`}>
-          <img
-            src={rightArrow}
-            alt='right arrow'
-            className='week__title--arrow'
-          />
-        </Link>
-      </div>
+    <div className='week'>
+      <div className='week__container'>
+        <div className='week__title'>
+          <Link to={'/week/1'}>
+            <img
+              src={leftArrow}
+              alt='left arrow'
+              className='week__title--arrow'
+            />
+          </Link>
+          <h2>{`${firstDay.toLocaleDateString()} - ${lastDay.toLocaleDateString()}`}</h2>
+          <Link to={`/week/2`}>
+            <img
+              src={rightArrow}
+              alt='right arrow'
+              className='week__title--arrow'
+            />
+          </Link>
+        </div>
 
-      <div className='week__chart'>
-        <LineChart chartData={weekData} />
+        <div className='week__chart'>
+          <LineChart chartData={weekData} />
+        </div>
       </div>
     </div>
   );

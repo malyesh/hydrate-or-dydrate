@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import './LineChart.scss';
-import isEqual from 'lodash/isEqual';
 
 export default function LineChart({ chartData }) {
   const [data, setData] = useState(null);
@@ -13,10 +12,6 @@ export default function LineChart({ chartData }) {
       });
       console.log(labelsArray);
 
-      // let labelsArray = chartData.map((day) => {
-      //   return new Date(newDay).toDateString();
-      // });
-      // console.log(labelsArray);
       let waterValues = chartData.map((day) => day.waterLevel);
       let coffeeValues = chartData.map((day) => day.coffeeLevel);
       let chart = {
