@@ -6,28 +6,32 @@ const authenticate = require('../middleware/authenticate');
 // const hydrationController = require('../controllers/hydration-controller');
 // router.route('/').get(hydrationController.index);
 
-router.get('/', authenticate, async (req, res) => {
-  let today = new Date().toLocaleDateString();
-  today = `${today.substring(6)}-${today.substring(0, 2)}-${today.substring(
-    3,
-    5
-  )}`;
-  const levels = await knex
+router.get('/:date', authenticate, async (req, res) => {
+  const { date } = req.params;
+  let today = `${date.substring(0, 10)}`;
+  const day = await knex
     .select('*')
     .from('hydration')
-    .where(knex.raw('CAST(created_at AS DATE) = ?', [today]))
+    .whereRaw('DATE(created_at) = ?', [today])
     .where({ user_id: req.user_id });
-  return res.status(200).json(levels);
+  return res.status(200).json(day);
 });
 
-router.post('/', authenticate, async (req, res) => {
+router.post('/:date', authenticate, async (req, res) => {
   console.log(req.user_id);
+  const { date } = req.params;
+  const formattedDate = new Date(date)
+    .toISOString()
+    .slice(0, 19)
+    .replace('T', ' ');
 
   const newLevel = {
     waterLevel: 0,
     coffeeLevel: 0,
     user_id: req.user_id,
+    created_at: formattedDate,
   };
+  console.log(newLevel);
 
   try {
     await knex('hydration').insert(newLevel);
@@ -89,6 +93,11 @@ router.get(
     return res.status(200).json(levels);
   }
 );
+// router.get('/:day', authenticate, async (req, res) => {
+//   const { day } = req.params;
+//   // console.log(day);
+//   console.log(req.user_id);
+// });
 
 // router.get('/', (req, res) => {
 //   console.log('GET all videos');
