@@ -1,40 +1,45 @@
-import React, { useEffect, useState } from "react";
-import { Line } from "react-chartjs-2";
-import "./LineChart.scss";
-import isEqual from "lodash/isEqual";
+import React, { useEffect, useState } from 'react';
+import { Line } from 'react-chartjs-2';
+import './LineChart.scss';
+import isEqual from 'lodash/isEqual';
 
 export default function LineChart({ chartData }) {
   const [data, setData] = useState(null);
 
-  console.table(chartData);
-
   useEffect(() => {
     const addChartData = async () => {
-      let labelsArray = chartData.map((day) =>
-        new Date(day.created_at).toDateString()
-      );
+      let labelsArray = chartData.map((day) => {
+        return day.created_at.substring(0, 10);
+      });
+      console.log(labelsArray);
+
+      // let labelsArray = chartData.map((day) => {
+      //   return new Date(newDay).toDateString();
+      // });
+      // console.log(labelsArray);
       let waterValues = chartData.map((day) => day.waterLevel);
       let coffeeValues = chartData.map((day) => day.coffeeLevel);
       let chart = {
         labels: labelsArray,
         datasets: [
           {
-            label: "Coffee Drinked",
+            label: 'Coffee Drinked',
             data: coffeeValues,
-            borderColor: "#563635",
-            backgroundColor: "#563635",
+            borderColor: '#563635',
+            backgroundColor: '#563635',
           },
           {
-            label: "Water Drinked",
+            label: 'Water Drinked',
             data: waterValues,
-            borderColor: "#80a4ed",
-            backgroundColor: "#80a4ed",
+            borderColor: '#80a4ed',
+            backgroundColor: '#80a4ed',
           },
         ],
       };
-      {
-        setData(chart);
-      }
+
+      setData(chart);
+
+      console.table(chartData);
     };
     addChartData();
   }, [chartData]);
@@ -44,12 +49,12 @@ export default function LineChart({ chartData }) {
   }
 
   return (
-    <div className="chart-container">
+    <div className='chart-container'>
       <Line
-        className="line-chart"
+        className='line-chart'
         data={data}
-        width={"80%"}
-        height={"80%"}
+        width={'80%'}
+        height={'80%'}
         options={{
           plugins: {
             title: {

@@ -1,26 +1,26 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const knex = require("knex")(require("../knexfile"));
-const authenticate = require("../middleware/authenticate");
+const knex = require('knex')(require('../knexfile'));
+const authenticate = require('../middleware/authenticate');
 
 // const hydrationController = require('../controllers/hydration-controller');
 // router.route('/').get(hydrationController.index);
 
-router.get("/", authenticate, async (req, res) => {
+router.get('/', authenticate, async (req, res) => {
   let today = new Date().toLocaleDateString();
   today = `${today.substring(6)}-${today.substring(0, 2)}-${today.substring(
     3,
     5
   )}`;
   const levels = await knex
-    .select("*")
-    .from("hydration")
-    .where(knex.raw("CAST(created_at AS DATE) = ?", [today]))
+    .select('*')
+    .from('hydration')
+    .where(knex.raw('CAST(created_at AS DATE) = ?', [today]))
     .where({ user_id: req.user_id });
   return res.status(200).json(levels);
 });
 
-router.post("/", authenticate, async (req, res) => {
+router.post('/', authenticate, async (req, res) => {
   console.log(req.user_id);
 
   const newLevel = {
@@ -30,62 +30,62 @@ router.post("/", authenticate, async (req, res) => {
   };
 
   try {
-    await knex("hydration").insert(newLevel);
-    res.status(200).send("Added successfully");
+    await knex('hydration').insert(newLevel);
+    res.status(200).send('Added successfully');
   } catch (error) {
-    res.status(400).send("Failed addition");
+    res.status(400).send('Failed addition');
   }
 });
 
-router.patch("/coffee", async (req, res) => {
+router.patch('/coffee', async (req, res) => {
   const { id, coffeeLevel } = req.body;
 
   try {
-    await knex("hydration")
+    await knex('hydration')
       .where({ id, id })
       .update({
         coffeeLevel: coffeeLevel + 1,
       });
-    res.status(201).send("Updated successfully");
+    res.status(201).send('Updated successfully');
   } catch (error) {
-    res.status(400).send("Failed to update");
+    res.status(400).send('Failed to update');
   }
 });
 
-router.patch("/water", async (req, res) => {
+router.patch('/water', async (req, res) => {
   const { id, waterLevel } = req.body;
 
   try {
-    await knex("hydration")
+    await knex('hydration')
       .where({ id, id })
       .update({
         waterLevel: waterLevel + 1,
       });
-    res.status(201).send("Updated successfully");
+    res.status(201).send('Updated successfully');
   } catch (error) {
-    res.status(400).send("Failed to update");
+    res.status(400).send('Failed to update');
   }
 });
 
 router.get(
-  "/week/startOfWeek/:startOfWeek/endOfWeek/:endOfWeek",
+  '/week/startOfWeek/:startOfWeek/endOfWeek/:endOfWeek',
   authenticate,
   async (req, res) => {
     const { startOfWeek } = req.params;
     const { endOfWeek } = req.params;
 
-    // let today = new Date();
-    // let startOfWeek = new Date(today);
-    // startOfWeek.setDate(today.getDate() - today.getDay());
-    // let endOfWeek = new Date(startOfWeek);
-    // endOfWeek.setDate(startOfWeek.getDate() + 6);
+    // let start = startOfWeek;
+    // let end = endOfWeek;
+    const start = new Date(startOfWeek);
+    console.log(start);
+    const end = new Date(endOfWeek);
+    console.log(end);
 
-    console.log(endOfWeek);
     const levels = await knex
-      .select("*")
-      .from("hydration")
-      .whereBetween("created_at", [startOfWeek, endOfWeek])
-      .where({ user_id: req.user_id });
+      .select('*')
+      .from('hydration')
+      .whereBetween(knex.raw('DATE(created_at)'), [start, end])
+      .andWhere({ user_id: req.user_id });
     return res.status(200).json(levels);
   }
 );
