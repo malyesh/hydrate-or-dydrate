@@ -20,7 +20,6 @@ export default function WeeklyView() {
   const [lastDay, setLastDay] = useState(endOfWeek);
   const [weekData, setWeekData] = useState([]);
   const [isCurrWeek, setIsCurrWeek] = useState(true);
-  // const [daysOfWeek, setDaysOfWeek] = useState([]);
 
   useEffect(() => {
     const getDaysOfWeek = () => {
@@ -34,16 +33,6 @@ export default function WeeklyView() {
     };
     const fillMissingDays = (data) => {
       const daysOfWeek = getDaysOfWeek();
-      // data.forEach((day) => {
-      //   console.log(day.created_at.substring(0, 10));
-      // });
-      // console.log(daysOfWeek.includes(today.toLocaleDateString()));
-      // console.log(today.toLocaleDateString());
-      // data.forEach((day) =>
-      //   console.log(
-      //     new Date(day.created_at.substring(0, 23)).toLocaleDateString()
-      //   )
-      // );
       const processedData = daysOfWeek.map((day) => {
         const matchingData = data.find(
           (item) =>
@@ -76,10 +65,6 @@ export default function WeeklyView() {
         );
 
         const processedData = fillMissingDays(result.data);
-        // console.log(processedData);
-
-        // setFirstDay(startOfWeek);
-        // setLastDay(endOfWeek);
         setWeekData(processedData);
       } catch (e) {
         console.log('error fetching weekly data', e);
@@ -90,11 +75,21 @@ export default function WeeklyView() {
   }, [token, apiBody, firstDay, lastDay]);
 
   const handleBackClick = () => {
-    console.log('back');
+    const startLastWeek = new Date(firstDay);
+    startLastWeek.setDate(firstDay.getDate() - 7);
+    const endLastWeek = new Date(lastDay);
+    endLastWeek.setDate(lastDay.getDate() - 7);
+    setFirstDay(startLastWeek);
+    setLastDay(endLastWeek);
   };
 
   const handleFrontClick = () => {
-    console.log('front');
+    const startNextWeek = new Date(firstDay);
+    startNextWeek.setDate(firstDay.getDate() + 7);
+    const endNextWeek = new Date(lastDay);
+    endNextWeek.setDate(lastDay.getDate() + 7);
+    setFirstDay(startNextWeek);
+    setLastDay(endNextWeek);
   };
 
   if (!weekData) {
@@ -105,23 +100,19 @@ export default function WeeklyView() {
     <div className='week'>
       <div className='week__container'>
         <div className='week__title'>
-          {/* <Link to={'/week/1'}> */}
           <img
             src={leftArrow}
             alt='left arrow'
             className='week__title--arrow'
             onClick={handleBackClick}
           />
-          {/* </Link> */}
           <h2>{`${firstDay.toLocaleDateString()} - ${lastDay.toLocaleDateString()}`}</h2>
-          {/* <Link to={`/week/2`}> */}
           <img
             src={rightArrow}
             alt='right arrow'
             className={`week__title--arrow ${isCurrWeek ? 'hide' : ''}`}
             onClick={handleFrontClick}
           />
-          {/* </Link> */}
         </div>
 
         <div className='week__chart'>

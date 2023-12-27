@@ -39,7 +39,7 @@ export default function LineChart({ chartData, setIsCurrWeek }) {
 
       setData(chart);
 
-      console.table(chartData);
+      // console.table(chartData);
     };
     addChartData();
   }, [chartData, setIsCurrWeek]);
@@ -66,6 +66,7 @@ export default function LineChart({ chartData, setIsCurrWeek }) {
           },
           scales: {
             x: {
+              min: 0,
               ticks: {
                 font: {
                   size: 11,
@@ -74,6 +75,7 @@ export default function LineChart({ chartData, setIsCurrWeek }) {
               },
             },
             y: {
+              min: 0,
               ticks: {
                 font: {
                   size: 11,
