@@ -19,6 +19,7 @@ export default function WeeklyView() {
   const [firstDay, setFirstDay] = useState(startOfWeek);
   const [lastDay, setLastDay] = useState(endOfWeek);
   const [weekData, setWeekData] = useState([]);
+  const [isCurrWeek, setIsCurrWeek] = useState(true);
   // const [daysOfWeek, setDaysOfWeek] = useState([]);
 
   useEffect(() => {
@@ -36,7 +37,8 @@ export default function WeeklyView() {
       // data.forEach((day) => {
       //   console.log(day.created_at.substring(0, 10));
       // });
-      // console.log(daysOfWeek.toLocaleString().substring(0, 10));
+      // console.log(daysOfWeek.includes(today.toLocaleDateString()));
+      // console.log(today.toLocaleDateString());
       // data.forEach((day) =>
       //   console.log(
       //     new Date(day.created_at.substring(0, 23)).toLocaleDateString()
@@ -74,7 +76,7 @@ export default function WeeklyView() {
         );
 
         const processedData = fillMissingDays(result.data);
-        console.log(processedData);
+        // console.log(processedData);
 
         // setFirstDay(startOfWeek);
         // setLastDay(endOfWeek);
@@ -87,6 +89,14 @@ export default function WeeklyView() {
     getAllWeekData();
   }, [token, apiBody, firstDay, lastDay]);
 
+  const handleBackClick = () => {
+    console.log('back');
+  };
+
+  const handleFrontClick = () => {
+    console.log('front');
+  };
+
   if (!weekData) {
     return <h2>Loading....</h2>;
   }
@@ -95,25 +105,27 @@ export default function WeeklyView() {
     <div className='week'>
       <div className='week__container'>
         <div className='week__title'>
-          <Link to={'/week/1'}>
-            <img
-              src={leftArrow}
-              alt='left arrow'
-              className='week__title--arrow'
-            />
-          </Link>
+          {/* <Link to={'/week/1'}> */}
+          <img
+            src={leftArrow}
+            alt='left arrow'
+            className='week__title--arrow'
+            onClick={handleBackClick}
+          />
+          {/* </Link> */}
           <h2>{`${firstDay.toLocaleDateString()} - ${lastDay.toLocaleDateString()}`}</h2>
-          <Link to={`/week/2`}>
-            <img
-              src={rightArrow}
-              alt='right arrow'
-              className='week__title--arrow'
-            />
-          </Link>
+          {/* <Link to={`/week/2`}> */}
+          <img
+            src={rightArrow}
+            alt='right arrow'
+            className={`week__title--arrow ${isCurrWeek ? 'hide' : ''}`}
+            onClick={handleFrontClick}
+          />
+          {/* </Link> */}
         </div>
 
         <div className='week__chart'>
-          <LineChart chartData={weekData} />
+          <LineChart chartData={weekData} setIsCurrWeek={setIsCurrWeek} />
         </div>
       </div>
     </div>

@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import './LineChart.scss';
 
-export default function LineChart({ chartData }) {
+const today = new Date();
+
+export default function LineChart({ chartData, setIsCurrWeek }) {
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -10,7 +12,10 @@ export default function LineChart({ chartData }) {
       let labelsArray = chartData.map((day) => {
         return day.created_at.substring(0, 10);
       });
-      console.log(labelsArray);
+      // console.log(labelsArray);
+      labelsArray.includes(today.toLocaleDateString())
+        ? setIsCurrWeek(true)
+        : setIsCurrWeek(false);
 
       let waterValues = chartData.map((day) => day.waterLevel);
       let coffeeValues = chartData.map((day) => day.coffeeLevel);
@@ -37,7 +42,7 @@ export default function LineChart({ chartData }) {
       console.table(chartData);
     };
     addChartData();
-  }, [chartData]);
+  }, [chartData, setIsCurrWeek]);
 
   if (!data) {
     return <h1>Loading...</h1>;
