@@ -1,0 +1,77 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/global" as *;
+@use "../../styles/partials/colors" as *;
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &__title {
+    text-transform: uppercase;
+  }
+  &__form {
+    padding: 1rem 0;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+
+    @include tablet {
+      width: 40%;
+    }
+  }
+  &__field {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 0.75rem;
+    &--label {
+      font-size: 12px;
+      text-transform: uppercase;
+      padding-bottom: 0.25rem;
+    }
+    &--input {
+      height: 2rem;
+      border-radius: 0.25rem;
+      padding: 0.5rem;
+    }
+  }
+  &__button {
+    @include custom-button;
+    height: 2rem;
+    padding: 0.5rem;
+    width: 100%;
+    margin-top: 2rem;
+
+    &:hover {
+      background-color: $dark-red;
+    }
+
+    @include desktop {
+      width: fit-content;
+      padding: 1.25rem 3rem;
+      align-self: center;
+    }
+  }
+
+  &__signup {
+    font-size: 12px;
+
+    &--link {
+      color: $dark-green;
+      font-weight: 600;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__error {
+    font-size: 10px;
+    color: red;
+    padding-top: 0.5rem;
+  }
+  &__success {
+    font-size: 10px;
+    color: green;
+    padding-top: 0.5rem;
+  }
+}

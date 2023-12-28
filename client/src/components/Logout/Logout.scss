@@ -1,8 +1,7 @@
+@use "../../styles/partials/mixins" as *;
 @use "../../styles/partials/global" as *;
 @use "../../styles/partials/colors" as *;
 
-.main {
-  background-color: $light-beige;
-  display: flex;
-  justify-content: center;
+.logout-button {
+  @include custom-pill;
 }
