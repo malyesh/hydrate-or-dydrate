@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import rightArrow from '../../assets/arrow-right-3098.svg';
-import leftArrow from '../../assets/arrow-left-3099.svg';
-import './WeeklyView.scss';
-import LineChart from '../../components/LineChart/LineChart';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import rightArrow from "../../assets/arrow-right-3098.svg";
+import leftArrow from "../../assets/arrow-left-3099.svg";
+import "./WeeklyView.scss";
+import LineChart from "../../components/LineChart/LineChart";
 
 const today = new Date();
 let startOfWeek = new Date(today);
@@ -13,7 +13,7 @@ endOfWeek.setDate(startOfWeek.getDate() + 6);
 
 export default function WeeklyView() {
   const apiBody = process.env.REACT_APP_API_URL;
-  const token = sessionStorage.getItem('token');
+  const token = sessionStorage.getItem("token");
 
   const [firstDay, setFirstDay] = useState(startOfWeek);
   const [lastDay, setLastDay] = useState(endOfWeek);
@@ -66,7 +66,7 @@ export default function WeeklyView() {
         const processedData = fillMissingDays(result.data);
         setWeekData(processedData);
       } catch (e) {
-        console.log('error fetching weekly data', e);
+        console.log("error fetching weekly data", e);
       }
     };
     getDaysOfWeek();
@@ -96,25 +96,25 @@ export default function WeeklyView() {
   }
 
   return (
-    <div className='week'>
-      <div className='week__container'>
-        <div className='week__title'>
+    <div className="week">
+      <div className="week__container">
+        <div className="week__title">
           <img
             src={leftArrow}
-            alt='left arrow'
-            className='week__title--arrow'
+            alt="left arrow"
+            className="week__title--arrow"
             onClick={handleBackClick}
           />
           <h2>{`${firstDay.toLocaleDateString()} - ${lastDay.toLocaleDateString()}`}</h2>
           <img
             src={rightArrow}
-            alt='right arrow'
-            className={`week__title--arrow ${isCurrWeek ? 'hide' : ''}`}
+            alt="right arrow"
+            className={`week__title--arrow ${isCurrWeek ? "hide" : ""}`}
             onClick={handleFrontClick}
           />
         </div>
 
-        <div className='week__chart'>
+        <div className="week__chart">
           <LineChart chartData={weekData} setIsCurrWeek={setIsCurrWeek} />
         </div>
       </div>
