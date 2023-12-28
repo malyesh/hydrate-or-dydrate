@@ -1,14 +1,22 @@
 @use '../../styles/partials/mixins' as *;
 @use '../../styles/partials/global' as *;
 @use '../../styles/partials/colors' as *;
+@use '../../styles/partials/variables' as *;
 
 .hero {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem;
-  padding-top: 0.5rem;
+  padding: 0 1rem 3rem;
   position: relative;
+
+  @include tablet {
+    width: 80%;
+  }
+
+  @include desktop {
+    width: 50%;
+  }
 }
 .top-banner {
   padding: 1rem 0;
@@ -16,20 +24,33 @@
   border-radius: 4px;
   width: 90%;
   text-align: center;
+  display: flex;
+  justify-content: space-between;
+  @include tablet {
+    width: 30rem;
+  }
+  &__arrow {
+    width: 0.75rem;
+    margin: 0 1rem;
+  }
 }
 
 .chart {
-  padding: 2rem;
-  padding-bottom: 0;
-  height: auto;
+  padding: 2rem 0 0;
   display: flex;
   flex-direction: column;
+  align-items: center;
 
   &__title {
-    align-self: center;
-    padding-bottom: 0.5rem;
-    border-bottom: 1.5px solid $dark-green;
+    text-align: center;
+    padding-bottom: 0.25rem;
+    border-bottom: 2px solid $dark-green;
     margin-bottom: 1rem;
+    width: fit-content;
+  }
+
+  &__container {
+    // width: 100%;
   }
 }
 
@@ -42,9 +63,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @include tablet {
+    width: 30rem;
+  }
+
   &__title {
     margin-bottom: 1rem;
-    border-bottom: 2px solid $dark-green;
+    border-bottom: 1.5px solid $dark-green;
     width: fit-content;
     text-align: center;
   }
@@ -58,6 +84,16 @@
 
 .week-button {
   @include custom-button;
+
+  @include tablet {
+    width: 30rem;
+  }
+
+  @include desktop {
+    width: auto;
+    padding: 1.5rem 3rem;
+  }
+
   &:hover {
     background-color: $dark-red;
   }
@@ -66,11 +102,28 @@
 .chart__label {
   display: flex;
   margin-left: 20px;
-  width: 47vw;
+  width: 10rem;
+  // width: 47vw;
   justify-content: space-between;
   padding-bottom: 2rem;
+
   &--item {
     height: 30px;
-    // font-size: 40px;
+    animation-name: click 3s 3s;
   }
+}
+
+@keyframes click {
+  // from {
+  //   transform: none;
+  // }
+  to {
+    transform: translate(5px, 5px);
+  }
+}
+
+.hide {
+  // position: relative;
+  // display: none;
+  visibility: hidden;
 }

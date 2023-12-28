@@ -1,4 +1,17 @@
 @use "../../styles/partials/colors" as *;
+@use "../../styles/partials/variables" as *;
+
+@mixin tablet {
+  @media (min-width: $tablet-breakpoint) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $desktop-breakpoint) {
+    @content;
+  }
+}
 
 @mixin custom-button {
   display: flex;
@@ -17,5 +30,23 @@
 
   &:focus {
     background-color: $dark-red;
+  }
+}
+
+@mixin custom-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $dark-green;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 2.5rem;
+  border: 0.125rem solid $dark-green;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $dark-green;
+    color: $light-beige;
   }
 }

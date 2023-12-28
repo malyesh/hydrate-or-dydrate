@@ -14,19 +14,29 @@ body {
   background-color: $light-beige;
 }
 
-h1 {
+.logo__text {
   font-family: "Fashion Fetish";
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 700;
   color: $dark-green;
+  line-height: 1.5rem;
 }
 
-h2 {
+h1 {
   font-size: 20px;
   font-weight: 600;
 }
 
-h3 {
-  font-size: 16px;
+h2 {
+  font-size: 15px;
   font-weight: 600;
+}
+
+h3 {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+a {
+  text-decoration: none;
 }

@@ -3,7 +3,7 @@ import { Bar } from 'react-chartjs-2';
 import axios from 'axios';
 import './BarChart.scss';
 
-export default function BarChart({ currentDay, waterLvl, coffeeLvl }) {
+export default function BarChart({ waterLvl, coffeeLvl }) {
   const chartData = {
     labels: ['', ''],
     datasets: [
@@ -16,30 +16,37 @@ export default function BarChart({ currentDay, waterLvl, coffeeLvl }) {
   };
   return (
     <section className='chart'>
-      <h2 className='chart__title'>HYDRATION LEVELS</h2>
-      <Bar
-        data={chartData}
-        options={{
-          scales: {
-            x: {
-              ticks: {
-                font: {
-                  size: 0,
+      <h1 className='chart__title'>HYDRATION LEVELS</h1>
+      <div className='chart__container'>
+        <Bar
+          data={chartData}
+          options={{
+            // barThickness: 60,
+            scales: {
+              x: {
+                display: false,
+              },
+              y: {
+                ticks: {
+                  font: {
+                    size: 11,
+                    family: '"Poppins", Arial, Helvetica, sans-serif',
+                  },
                 },
               },
             },
-          },
-          plugins: {
-            title: {
-              display: false,
-              text: 'Hydration',
+            plugins: {
+              title: {
+                display: false,
+                text: 'Hydration',
+              },
+              legend: {
+                display: false,
+              },
             },
-            legend: {
-              display: false,
-            },
-          },
-        }}
-      />
+          }}
+        />
+      </div>
     </section>
   );
 }

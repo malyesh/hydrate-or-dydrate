@@ -1,18 +1,72 @@
-@use "../../styles/partials/global" as *;
-@use "../../styles/partials/colors" as *;
+@use '../../styles/partials/global' as *;
+@use '../../styles/partials/colors' as *;
+@use '../../styles/partials/mixins' as *;
 
 .week {
+  background-color: $light-beige;
+  display: flex;
+  justify-content: center;
   &__container {
-    background-color: $light-beige;
-    height: 85vh;
-  }
-  &__title {
-    padding: 2rem 1rem;
+    // background-color: $light-beige;
+    // padding-bottom: 3rem;
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
+    // padding: 0 1rem 3rem;
+    // width: fit-content;
+    // position: relative;
+
+    // @include tablet {
+    //   width: 80%;
+    // }
+
+    // @include desktop {
+    //   width: 50%;
+    // }
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
     align-items: center;
-    &--arrow {
-      width: 1rem;
+    padding: 0 1rem 3rem;
+    position: relative;
+
+    @include tablet {
+      width: 80%;
+    }
+
+    @include desktop {
+      width: 50%;
     }
   }
+  &__title {
+    background-color: $dark-beige;
+    border-radius: 4px;
+    width: 100%;
+    padding: 1rem 0;
+    text-align: center;
+    justify-content: space-between;
+    display: flex;
+    &--arrow {
+      width: 0.75rem;
+      margin: 0 1rem;
+    }
+    @include tablet {
+      width: 30rem;
+    }
+  }
+
+  &__chart {
+    margin-top: 1rem;
+    // width: 100%;
+    // width: 75%;
+
+    // @include tablet {
+    //   width: 60%;
+    // }
+  }
+}
+
+.hide {
+  // position: relative;
+  // display: none;
+  visibility: hidden;
 }
