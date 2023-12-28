@@ -15,7 +15,6 @@ router.get("/:date", authenticate, async (req, res) => {
 });
 
 router.post("/:date", authenticate, async (req, res) => {
-  console.log(req.user_id);
   const { date } = req.params;
   const formattedDate = new Date(date)
     .toISOString()
@@ -75,9 +74,7 @@ router.get(
     const { endOfWeek } = req.params;
 
     const start = new Date(startOfWeek);
-    console.log(start);
     const end = new Date(endOfWeek);
-    console.log(end);
 
     const levels = await knex
       .select("*")
