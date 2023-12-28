@@ -1,7 +1,0 @@
-@use "../../styles/partials/mixins" as *;
-@use "../../styles/partials/global" as *;
-@use "../../styles/partials/colors" as *;
-
-.logout-button {
-  @include custom-pill;
-}

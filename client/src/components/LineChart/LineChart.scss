@@ -1,18 +1,4 @@
-@use "../../styles/partials/global" as *;
-@use "../../styles/partials/colors" as *;
-@use "../../styles/partials/mixins" as *;
-
 .chart-container {
   display: flex;
   justify-content: center;
-}
-.line-chart {
-  display: block;
-  box-sizing: border-box;
-  height: 20rem;
-  width: 20rem;
-  @include tablet {
-    height: 23.75rem;
-    width: 23.75rem;
-  }
 }
