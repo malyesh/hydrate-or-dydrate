@@ -30,8 +30,8 @@
     }
     &--input {
       height: 2rem;
-      border-radius: 4px;
-      padding: 8px;
+      border-radius: 0.25rem;
+      padding: 0.5rem;
     }
   }
   &__button {
@@ -67,11 +67,11 @@
   &__error {
     font-size: 10px;
     color: red;
-    padding-top: 8px;
+    padding-top: 0.5rem;
   }
   &__success {
     font-size: 10px;
     color: green;
-    padding-top: 8px;
+    padding-top: 0.5rem;
   }
 }
