@@ -1,48 +1,45 @@
-import { Bar } from "react-chartjs-2";
+import React, { useEffect, useState } from 'react';
+import { Bar } from 'react-chartjs-2';
+import axios from 'axios';
+import './BarChart.scss';
 
-export default function BarChart({ waterLvl, coffeeLvl }) {
+export default function BarChart({ currentDay, waterLvl, coffeeLvl }) {
   const chartData = {
-    labels: ["", ""],
+    labels: ['', ''],
     datasets: [
       {
-        label: "hydration",
+        label: 'hydration',
         data: [coffeeLvl, waterLvl],
-        backgroundColor: ["#563635", "#80a4ED"],
+        backgroundColor: ['#563635', '#80a4ED'],
       },
     ],
   };
   return (
-    <section className="chart">
-      <h1 className="chart__title">HYDRATION LEVELS</h1>
-      <div className="chart__container">
-        <Bar
-          data={chartData}
-          options={{
-            scales: {
-              x: {
-                display: false,
-              },
-              y: {
-                ticks: {
-                  font: {
-                    size: 11,
-                    family: '"Poppins", Arial, Helvetica, sans-serif',
-                  },
+    <section className='chart'>
+      <h2 className='chart__title'>HYDRATION LEVELS</h2>
+      <Bar
+        data={chartData}
+        options={{
+          scales: {
+            x: {
+              ticks: {
+                font: {
+                  size: 0,
                 },
               },
             },
-            plugins: {
-              title: {
-                display: false,
-                text: "Hydration",
-              },
-              legend: {
-                display: false,
-              },
+          },
+          plugins: {
+            title: {
+              display: false,
+              text: 'Hydration',
             },
-          }}
-        />
-      </div>
+            legend: {
+              display: false,
+            },
+          },
+        }}
+      />
     </section>
   );
 }
