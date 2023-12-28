@@ -14,11 +14,14 @@ A responsive application where users can track their hydration (or lack thereof)
 
 ## Technologies Used
 
+#### Front-End
 - HTML
 - SCSS
 - React
 - ChartJS library
 - Axios
+
+#### Back-End
 - Node
 - Express.js
 - MySQL
@@ -89,9 +92,21 @@ Start the server
 npm start
 ```
 
-## How to Use
+## Preview
 
 Sign up page to create an account
+
+![Screenshot 2023-12-28 122011](https://github.com/malyesh/hydrate-or-dydrate/assets/74512928/25866391-2372-44a2-b50a-47811f8824c7)
+
+
 Login page to sign in
+
+![Screenshot 2023-12-28 122025](https://github.com/malyesh/hydrate-or-dydrate/assets/74512928/1318f73f-4675-4d54-977f-91addb46a2d6)
+
 View coffee and water levels, go back and forth to see previous days, and update by clicking on the coffee beans and water drops
+
+![Screenshot 2023-12-28 122128](https://github.com/malyesh/hydrate-or-dydrate/assets/74512928/706c3254-d088-4f83-bf54-e7358ff81309)
+
 View hydration levels over a week, go back and forth to check different weeks
+
+![Screenshot 2023-12-28 124104](https://github.com/malyesh/hydrate-or-dydrate/assets/74512928/1f457b29-dfb3-4877-956e-63513f89ce66)
