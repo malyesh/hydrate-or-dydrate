@@ -35,6 +35,7 @@
     &--arrow {
       width: 0.75rem;
       margin: 0 1rem;
+      cursor: pointer;
     }
     @include tablet {
       width: 30rem;
