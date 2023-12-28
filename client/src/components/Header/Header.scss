@@ -1,30 +1,9 @@
 @use "../../styles/partials/global" as *;
 @use "../../styles/partials/colors" as *;
-@use "../../styles/partials/variables" as *;
-@use "../../styles/partials/mixins" as *;
 
 .header {
-  display: flex;
-  justify-content: center;
-
-  &__container {
-    background-color: $light-beige;
-    border-bottom: 0.125rem solid $dark-green;
-    padding: 1.5rem 0.5rem 0.5rem;
-    margin: 0 1.5rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 80%;
-
-    @include tablet {
-      width: 80%;
-    }
-
-    @include desktop {
-      width: 50rem;
-    }
-  }
+  background-color: $light-beige;
+  height: 15%;
 }
 
 .logo-link {
@@ -33,7 +12,14 @@
 }
 
 .logo {
+  margin: 1.5rem;
   align-self: flex-start;
   text-align: left;
+  border-bottom: 3px solid $dark-green;
   width: 100%;
+  padding-bottom: 0.25rem;
+
+  &__text {
+    line-height: 1.5rem;
+  }
 }
