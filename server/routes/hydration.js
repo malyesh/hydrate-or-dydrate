@@ -71,6 +71,28 @@ router.patch('/water', async (req, res) => {
   }
 });
 
+router.get(
+  '/week/startOfWeek/:startOfWeek/endOfWeek/:endOfWeek',
+  authenticate,
+  async (req, res) => {
+    const { startOfWeek } = req.params;
+    const { endOfWeek } = req.params;
+
+    // let start = startOfWeek;
+    // let end = endOfWeek;
+    const start = new Date(startOfWeek);
+    console.log(start);
+    const end = new Date(endOfWeek);
+    console.log(end);
+
+    const levels = await knex
+      .select('*')
+      .from('hydration')
+      .whereBetween(knex.raw('DATE(created_at)'), [start, end])
+      .andWhere({ user_id: req.user_id });
+    return res.status(200).json(levels);
+  }
+);
 // router.get('/:day', authenticate, async (req, res) => {
 //   const { day } = req.params;
 //   // console.log(day);
