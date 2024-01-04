@@ -4,6 +4,7 @@ const app = express();
 require('dotenv').config();
 const dataRoute = require('./routes/hydration');
 const authRoute = require('./routes/user-auth');
+const PORT = process.env.PORT || 5050;
 
 const origin = 'http://localhost:3000';
 
@@ -32,6 +33,6 @@ app.get('/', (req, res) => {
 app.use('/auth', authRoute);
 app.use('/hydration', dataRoute);
 
-app.listen(8080, function () {
-  console.log('running on port 8080');
+app.listen(PORT, function () {
+  console.log(`running on port ${PORT}`);
 });
