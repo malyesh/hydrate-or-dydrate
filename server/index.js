@@ -6,7 +6,7 @@ const dataRoute = require('./routes/hydration');
 const authRoute = require('./routes/user-auth');
 const PORT = process.env.PORT || 5050;
 
-const origin = 'http://localhost:3000';
+const origin = process.env.CORS_ORIGIN;
 
 app.use(
   cors({
